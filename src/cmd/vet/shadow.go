@@ -240,7 +240,7 @@ func checkShadowing(f *File, ident *ast.Ident) {
 		}
 	}
 	// Don't complain if the types differ: that implies the programmer really wants two different things.
-	if types.Identical(obj.Type(), shadowed.Type()) {
+	if types.Identical(obj.Type(), shadowed.Type()) && obj.Name() != "ok" && obj.Name() != "err" {
 		f.Badf(ident.Pos(), "declaration of %q shadows declaration at %s", obj.Name(), f.loc(shadowed.Pos()))
 	}
 }
